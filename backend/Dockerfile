@@ -1,5 +1,5 @@
-# Use the official Node.js 14 image as a base image
-FROM node:14
+# Use a smaller base image
+FROM node:14-alpine
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install the application's dependencies inside the container
-RUN npm install
+RUN npm install --only=prod
 
 # Copy the rest of the application code to the container
 COPY . .
@@ -18,3 +18,4 @@ EXPOSE 8080
 
 # Specify the command to run when the container starts
 CMD [ "node", "index.js" ]
+
